@@ -32,8 +32,16 @@ There are different solutions are in market right now. I found below products ve
 |   Support for S3 (AWS)  | Yes  | Yes | Natively no    |
 |   Support for spark  | Yes  | No |  Yes  |
 
+## A comparison study on performance on same data set. 
 
-
+| Item        | Drill           | Impala  | Stinger.next|
+| ------------- |:-------------:| -----:|  ----------:|
+| Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0 (VM)| Cloudera QuickStart VMs for CDH 5.3.x| Sandbox HDP 2.2.4    |
+|   Cores  | 2  | 2 |  2  |
+|   Memory  | 8GB  | 8GB |  8GB  |
+|   Support for spark  | Yes  | No |  Yes  |
+|   Support for spark  | Yes  | No |  Yes  |
+|   Support for spark  | Yes  | No |  Yes  |
 
 
 
