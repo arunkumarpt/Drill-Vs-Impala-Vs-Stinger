@@ -36,7 +36,7 @@ There are different solutions are in market right now. I found below products ve
 
 | Item        | Drill           | Impala  | Stinger.next|
 | ------------- |:-------------:| -----:|  ----------:|
-| Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0 (VM)| Cloudera QuickStart VMs for CDH 5.3.x| Sandbox HDP 2.2.4    |
+| Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0| Cloudera QuickStart VM for CDH 5.3| Sandbox HDP 2.2.4    |
 |   Cores  | 2  | 2 |  2  |
 |   Memory  | 8GB  | 8GB |  8GB  |
 |   Support for spark  | Yes  | No |  Yes  |
