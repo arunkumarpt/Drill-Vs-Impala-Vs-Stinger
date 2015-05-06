@@ -34,14 +34,29 @@ There are different solutions are in market right now. I found below products ve
 
 ## A comparison study on performance on same data set. 
 
+### 1. Small & Simple Data set : building.csv 20 rows and 5 coums. HVAC.csv : 8000 rows and 7 columns.
+
+Join Query : 
+
+select a.buildingid, b.buildingmgr, max(a.targettemp-a.actualtemp)
+from hvac a join building b
+on a.buildingid = b.buildingid
+group by a.buildingid, b.buildingmgr;
+
+
 | Item        | Drill           | Impala  | Stinger.next|
 | ------------- |:-------------:| -----:|  ----------:|
 | Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0| Cloudera QuickStart VM for CDH 5.3| Sandbox HDP 2.2.4    |
 |   Cores  | 2  | 2 |  2  |
 |   Memory  | 8GB  | 8GB |  8GB  |
-|   Support for spark  | Yes  | No |  Yes  |
-|   Support for spark  | Yes  | No |  Yes  |
-|   Support for spark  | Yes  | No |  Yes  |
+|     | Join: Time in seconds  | No |  Yes  |Time taken: 31.243 seconds, Fetched: 20 row(s) |
+|   Same Query again : Time in seconds | Yes  | No |Time taken: 10.788 seconds, Fetched: 20 row(s)  |
+
+
+
+Impala is an in-memory SQL-on-Hadoop project that supports interactive use cases. Its development was and is spearheaded by Cloudera. (Proponents claim that Spark's ability to persist data to disk gives it a distinct advantage over Impala, which has no provision for spilling over to disk if it runs out of physical memory.)
+
+
 
 
 
