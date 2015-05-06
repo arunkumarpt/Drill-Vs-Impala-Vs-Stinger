@@ -36,12 +36,23 @@ There are different solutions are in market right now. I found below products ve
 
 ### 1. Small & Simple Data set : building.csv 20 rows and 5 coums. HVAC.csv : 8000 rows and 7 columns.
 
-Join Query : 
+Join Query : Hortonworks HDP
 
 select a.buildingid, b.buildingmgr, max(a.targettemp-a.actualtemp)
 from hvac a join building b
 on a.buildingid = b.buildingid
 group by a.buildingid, b.buildingmgr;
+
+Join Query : MapR-Sandbox-For-Apache-Drill
+
+select a.buildingid, b.buildingmgr, max(a.targettemp-a.actualtemp)
+from hvac a join building b
+on a.buildingid = b.buildingid
+group by a.buildingid, b.buildingmgr;
+
+
+Select a.columns[6], b.columns[1], max(a.columns[2]-a.columns[3]) from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join   dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
+group by a.columns[6], b.columns[1];
 
 
 | Item        | Drill           | Impala  | Stinger.next|
