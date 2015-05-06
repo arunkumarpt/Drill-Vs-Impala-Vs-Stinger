@@ -36,103 +36,36 @@ There are different solutions are in market right now. I found below products ve
 
 ### 1. Small & Simple Data set : building.csv 20 rows and 5 coums. HVAC.csv : 8000 rows and 7 columns.
 
-Join Query : Hortonworks HDP
+####Join Query : Hortonworks HDP
+```
+set hive.execution.engine=tez;
 
-select a.buildingid, b.buildingmgr, max(a.targettemp-a.actualtemp)
+select a.buildingid, b.buildingmgr, max(a.targettemp)
 from hvac a join building b
 on a.buildingid = b.buildingid
 group by a.buildingid, b.buildingmgr;
+```
 
-Join Query : MapR-Sandbox-For-Apache-Drill
+####Join Query : MapR-Sandbox-For-Apache-Drill
 
-select a.buildingid, b.buildingmgr, max(a.targettemp-a.actualtemp)
-from hvac a join building b
-on a.buildingid = b.buildingid
-group by a.buildingid, b.buildingmgr;
+The .csv files directly loaded to hdfs.
 
+```
+Select a.columns[6], b.columns[1]  , MAX(a.columns[2]) from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join   dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
+group by a.columns[6], b.columns[1]
 
-Select a.columns[6], b.columns[1], max(a.columns[2]-a.columns[3]) from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join   dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
-group by a.columns[6], b.columns[1];
+```
+####Join Query : MapR-Sandbox-For-Apache-Drill
 
 
 | Item        | Drill           | Impala  | Stinger.next|
 | ------------- |:-------------:| -----:|  ----------:|
-| Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0| Cloudera QuickStart VM for CDH 5.3| Sandbox HDP 2.2.4    |
+| Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0| cloudera-quickstart-vm-5.4.0-0| Sandbox HDP 2.2.4    |
 |   Cores  | 2  | 2 |  2  |
 |   Memory  | 8GB  | 8GB |  8GB  |
-|     | Join: Time in seconds  | No |  Yes  |Time taken: 31.243 seconds, Fetched: 20 row(s) |
-|   Same Query again : Time in seconds | Yes  | No |Time taken: 10.788 seconds, Fetched: 20 row(s)  |
+|    Join: Time in seconds  | Less than a second |  Yes  |89.332 seconds |
+|   Same Query again : Time in seconds | Less than a second   | No |33.083 seconds|  
 
-
-
-Impala is an in-memory SQL-on-Hadoop project that supports interactive use cases. Its development was and is spearheaded by Cloudera. (Proponents claim that Spark's ability to persist data to disk gives it a distinct advantage over Impala, which has no provision for spilling over to disk if it runs out of physical memory.)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-MapR Drill Basics
- - Easy SQL query on HDFS
- - Can query semi structed data directly without ETL
- - Schema on Fly
- - Query on json and parque using std SQL
- - JDBC for tableau, Microstrategy, SAS
- - ODBC for Drill Explorer
- - Drill Explorer for analyze metadata for unstructed data
- - Drill Explorer will automatically create sql queries for the selected table/cloumn
-How Drill identify the schema
- - Schema on fly
- - Select * from hive.orders  hive -> storage system type, orders -> table
- - No need to connect the data base before query
- - Drill explorer will connect to hive metastore and fetch the metadata and show to the user. User can explore
-   the metadata before writitng the actual queries. (No coding required)
- - Query on HIVE, HBASE and JSON
- - Create view and save it in Drill Explorer
-Key features
- - Extensibility
- - Full Structured Query Language
- - Nested data
- - unknown schemas
- - Not only for hadoop
-
-Sandbox
-
-```
-arun:~ arun$ ssh mapr@localhost -p 2222
-The authenticity of host '[localhost]:2222 ([127.0.0.1]:2222)' can't be established.
-RSA key fingerprint is ce:e9:73:20:5c:f8:e5:50:c6:e2:d0:11:89:29:d0:ad.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added '[localhost]:2222' (RSA) to the list of known hosts.
-Password: 
-Welcome to your Mapr Demo virtual machine.
-[mapr@maprdemo ~]$ sqlline
-Drill log directory: /opt/mapr/drill/drill-0.8.0/logs
-```
-
-Things to remember
-
-tableau -> Drill -> json (remove the etl process - no need for schema)
-
-Drill on spark
-
-#Impala
-Impala, the open source MPP analytic database for Apache Hadoop, is now firmly entrenched in the Big Data mainstream
 
 
 
