@@ -33,29 +33,8 @@ There are different solutions are in market right now. I found below products ve
 
 ## A comparison study on performance on same data set. 
 
-### 1. Small & Simple Data set : building.csv 20 rows and 5 coums. HVAC.csv : 8000 rows and 7 columns.
+Small & Simple Data set : building.csv 20 rows and 5 coums. HVAC.csv : 8000 rows and 7 columns.
 
-####Join Query : Hortonworks HDP
-```
-set hive.execution.engine=tez;
-
-select a.buildingid, b.buildingmgr, max(a.targettemp)
-from hvac a join building b
-on a.buildingid = b.buildingid
-group by a.buildingid, b.buildingmgr;
-```
-
-####Join Query : MapR-Sandbox-For-Apache-Drill
-
-The .csv files directly loaded to hdfs.
-
-```
-Select a.columns[6], b.columns[1]  , MAX(a.columns[2]) 
-from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join  
-dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
-group by a.columns[6], b.columns[1]
-
-```
 ####Join Query : cloudera-quickstart-vm-5.4.0-0
 
 ```
@@ -93,6 +72,29 @@ on a.BuildingID = b.BuildingID
 group by a.BuildingID, b.BuildingMgr;
 
 ```
+
+####Join Query : Hortonworks HDP
+```
+set hive.execution.engine=tez;
+
+select a.buildingid, b.buildingmgr, max(a.targettemp)
+from hvac a join building b
+on a.buildingid = b.buildingid
+group by a.buildingid, b.buildingmgr;
+```
+
+####Join Query : MapR-Sandbox-For-Apache-Drill
+
+The .csv files directly loaded to hdfs.
+
+```
+Select a.columns[6], b.columns[1]  , MAX(a.columns[2]) 
+from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join  
+dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
+group by a.columns[6], b.columns[1]
+
+```
+
 
 Processor :  Intel core i5 2.6Ghz
 
