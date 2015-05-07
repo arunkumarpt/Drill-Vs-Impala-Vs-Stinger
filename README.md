@@ -1,11 +1,13 @@
 # Real time ad-hoc querying on Big Data 
 
-Here is an comparative study on real time ad hoc SQL like querying on Big data on scale. Below are the products from 'big'  big data players such as Cloudera, Hortonworks, MapR.
-
 As the hadoop clusters are going large and large, traditional batch processing is inadequate for data analysis. Demand for SQL like ad hoc quering on big data sitting in large hadoop clusters is increasing all the time. 
 Hive served up to an extend for analysing big data but it relay on traditional map-reduce approach. Set up time for map reduce jobs are costly so a faster approach is in demand. 
 
-There are different solutions are in market right now. I found below products very promising and worth a try. 
+I have done some research on  'real time ad hoc SQL like querying on Big data'.
+
+There are different solutions for this avilable in market right now. I found below products very promising and worth a try. 
+
+Note : All these products are aimed at a distributed architecture to handle large amount of data. My study involved a small data set and used quick start VMs of respextive products. So this study may not give a concreate conclusion but still can be used as a reference.
 
 
 ##Drill Vs Impala Vs Stinger
@@ -105,6 +107,9 @@ Processor :  Intel core i5 2.6Ghz
 |   Memory  | 8GB  | 8GB |  8GB  |
 |    Join: Time in seconds  | Less than a second |  3-5 seconds  |70-90 seconds |
 |   Same Query again : Time in seconds | Less than a second   | 3-5 seconds |30-35 seconds|  
+
+
+This study revelealed that MapR Drill is the winner. Again, data is so small, test ran in a small VM environment, and drill can levarage schema on fly. 
 
 
 
