@@ -27,7 +27,6 @@ There are different solutions are in market right now. I found below products ve
 |   distributed execution environment    | Drill bits and Zookeeper | The Impala Daemon and Impala Statestore (health check, running in one node), Impala Catalog Service provides metadata changes (running in one node)   | LLAP, a process for multi-threaded execution, will work with Apache Tez to achieve sub-second response times   |
 | user interfaces   | Drill shell (SQLLine),Drill Web UI, ODBC, JDBC, C++ API  | The impala-shell interactive command interpreter, The Apache Hue web-based user interface, JDBC, ODBC  | Current Hive UIs   |
 |   Architecture    | Distributed, no master-slave, any node can get the query | Distributed, You can submit a query to the Impala daemon running on any node, and that node serves as the coordinator node for that query | Uses Hive with the help of ORC, Tez and a new query execution plans   |
-|   Joins on different storage layers    | Yes, can join tables from HBASE, JSON, HIVE in a single query |  |    |
 |   Works well with    | JSON, can directly query on JSON with out  creating structure  | Parquet file format | ORC   |
 |   Support for S3 (AWS)  | Yes  | Yes | Natively no    |
 |   Support for spark  | Yes  | No |  Yes  |
