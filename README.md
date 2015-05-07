@@ -51,20 +51,59 @@ group by a.buildingid, b.buildingmgr;
 The .csv files directly loaded to hdfs.
 
 ```
-Select a.columns[6], b.columns[1]  , MAX(a.columns[2]) from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join   dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
+Select a.columns[6], b.columns[1]  , MAX(a.columns[2]) 
+from dfs.`/mapr/demo.mapr.com/data/HVAC.csv` a join  
+dfs.`/mapr/demo.mapr.com/data/building.csv` b on a.columns[6] = b.columns[0]
 group by a.columns[6], b.columns[1]
 
 ```
-####Join Query : MapR-Sandbox-For-Apache-Drill
+####Join Query : cloudera-quickstart-vm-5.4.0-0
 
+```
+CREATE EXTERNAL TABLE hvac
+(
+   Date1 string,
+   Time1 string,
+   TargetTemp int,
+   ActualTemp int,
+   System int,
+   SystemAge int,
+   BuildingID int
+  
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+LOCATION '/user/cloudera/hvac/';
+
+CREATE EXTERNAL TABLE building
+(
+ BuildingID int,
+ BuildingMgr string,
+ BuildingAge int,
+ HVACproduct string,
+ Country string
+)
+
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+LOCATION '/user/cloudera/building/';
+
+
+
+select a.BuildingID, b.BuildingMgr, max(a.TargetTemp)
+from hvac a join building b
+on a.BuildingID = b.BuildingID
+group by a.BuildingID, b.BuildingMgr;
+
+```
+
+Processor :  Intel core i5 2.6Ghz
 
 | Item        | Drill           | Impala  | Stinger.next|
 | ------------- |:-------------:| -----:|  ----------:|
 | Environment      | MapR-Sandbox-For-Apache-Drill-0.8.0-4.1.0| cloudera-quickstart-vm-5.4.0-0| Sandbox HDP 2.2.4    |
 |   Cores  | 2  | 2 |  2  |
 |   Memory  | 8GB  | 8GB |  8GB  |
-|    Join: Time in seconds  | Less than a second |  Yes  |89.332 seconds |
-|   Same Query again : Time in seconds | Less than a second   | No |33.083 seconds|  
+|    Join: Time in seconds  | Less than a second |  3-5 seconds  |70-90 seconds |
+|   Same Query again : Time in seconds | Less than a second   | 3-5 seconds |30-35 seconds|  
 
 
 
